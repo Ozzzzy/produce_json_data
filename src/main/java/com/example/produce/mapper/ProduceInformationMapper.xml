@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.produce.mapper.ProduceInformationMapper">
+
+    <insert id="add" parameterType="com.example.produce.entity.ProduceInformation" useGeneratedKeys="true">
+        INSERT INTO produce.produce_information
+            (produceId,
+             produceName,
+             produceIndustry,
+             deviceNode,
+             accessProtocol,
+             networkingMode,
+             produceModel,
+             produceDescription)
+             VALUES
+                    (#{produceId},
+                     #{produceName},
+                     #{produceIndustry},
+                     #{deviceNode},
+                     #{accessProtocol},
+                     #{networkingMode},
+                     #{produceModel},
+                     #{produceDescription});
+    </insert>
+
+    <update id="modify" parameterType="com.example.produce.entity.ProduceInformation" useGeneratedKeys="true">
+        UPDATE produce.produce_information SET produceName = #{produceName},
+                                               produceIndustry = #{produceIndustry},
+                                               deviceNode = #{deviceNode},
+                                               accessProtocol = #{accessProtocol},
+                                               networkingMode = #{networkingMode},
+                                               produceModel = #{produceModel},
+                                               produceDescription = #{produceDescription}
+        WHERE produceId = #{produceId};
+    </update>
+
+    <select id="details" parameterType="java.lang.Integer"
+            resultType="com.example.produce.entity.ProduceInformation">
+        SELECT produceId,
+               produceName,
+               produceIndustry,
+               deviceNode,
+               accessProtocol,
+               networkingMode,
+               produceModel,
+               produceDescription
+        FROM produce.produce_information WHERE produceId = #{produceId};
+    </select>
+
+    <select id="produceList" parameterType="com.example.produce.entity.ProduceInformation"
+            resultType="com.example.produce.entity.ProduceInformation">
+        SELECT produceId,
+               produceName,
+               produceIndustry,
+               deviceNode,
+               accessProtocol,
+               networkingMode,
+               produceModel,
+               produceDescription
+        FROM produce.produce_information;
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM produce.produce_information WHERE produceId = #{produceId};
+    </delete>
+
+</mapper>
