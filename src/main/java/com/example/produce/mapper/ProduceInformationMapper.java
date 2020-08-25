@@ -14,37 +14,50 @@ import java.util.List;
 public interface ProduceInformationMapper {
 
     /**
-     * 添加产品信息
+     * 1. 添加产品信息
      * @param produceInformation
      * @return
      */
     int add(ProduceInformation produceInformation);
 
     /**
-     * 修改产品信息
+     * 2. 修改产品信息
      * @param produceInformation
      * @return
      */
     int modify(ProduceInformation produceInformation);
 
     /**
-     * 查看 id 为 produceId 的产品详情
+     * 3. 查看 id 为 produceId 的产品详情
      * @param produceId
      * @return
      */
     ProduceInformation details(int produceId);
 
     /**
-     * 查看产品列表
+     * 4. 查看产品列表
      * @return
      */
     List<ProduceInformation> produceList();
 
     /**
-     * 删除产品
+     * 5. 删除产品
      * @param produceId
      * @return
      */
     int delete(int produceId);
+
+    /**
+     * 6. 获取产品名称列表
+     * @return
+     */
+    String[] getProduceNameList();
+
+    /**
+     * 7. 获取除此产品id以外的名称列表
+     * @param produceId
+     * @return
+     */
+    String[] getProduceNameList2(int produceId);
 
 }

@@ -25,9 +25,7 @@ public class ProduceInformationController {
         try {
             JsonReader jsonReader = new JsonReader();
             ProduceInformation produceInformation = jsonReader.getProduceList(jsonString).get(0);
-            produceInformationService.addProduce(produceInformation);
-            return "add successful !";
-
+            return produceInformationService.addProduce(produceInformation);
         }catch (Exception e){
             e.printStackTrace();
             return "wrong";
@@ -39,9 +37,7 @@ public class ProduceInformationController {
         try {
             JsonReader jsonReader = new JsonReader();
             ProduceInformation produceInformation = jsonReader.getProduceList(jsonString).get(0);
-            produceInformationService.modifyProduce(produceInformation);
-            return "modify successful !";
-
+            return produceInformationService.modifyProduce(produceInformation);
         }catch (Exception e){
             e.printStackTrace();
             return "wrong";
@@ -73,14 +69,21 @@ public class ProduceInformationController {
     @RequestMapping(value = "/deleteProduce",produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
     public @ResponseBody String deleteProduce(int produceId)throws Exception{
         try {
-            produceInformationService.deleteProduce(produceId);
-            return "delete successful!";
-
+            return produceInformationService.deleteProduce(produceId);
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
     }
 
+    @RequestMapping(value = "/pageProduceInfo",produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
+    public PageInfo pageProduceInfo(@RequestParam int pageNum, @RequestParam int pageSize)throws Exception{
+        try {
+            return produceInformationService.findPage(pageNum,pageSize);
 
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

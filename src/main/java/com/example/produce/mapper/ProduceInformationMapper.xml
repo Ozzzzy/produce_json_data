@@ -22,7 +22,7 @@
                      #{accessProtocol},
                      #{networkingMode},
                      #{produceModel},
-                     #{produceDescription});
+                     #{produceDescription})
     </insert>
 
     <update id="modify" parameterType="com.example.produce.entity.ProduceInformation" useGeneratedKeys="true">
@@ -33,7 +33,7 @@
                                                networkingMode = #{networkingMode},
                                                produceModel = #{produceModel},
                                                produceDescription = #{produceDescription}
-        WHERE produceId = #{produceId};
+        WHERE produceId = #{produceId}
     </update>
 
     <select id="details" parameterType="java.lang.Integer"
@@ -46,7 +46,7 @@
                networkingMode,
                produceModel,
                produceDescription
-        FROM produce.produce_information WHERE produceId = #{produceId};
+        FROM produce.produce_information WHERE produceId = #{produceId}
     </select>
 
     <select id="produceList" parameterType="com.example.produce.entity.ProduceInformation"
@@ -59,11 +59,23 @@
                networkingMode,
                produceModel,
                produceDescription
-        FROM produce.produce_information;
+        FROM produce.produce_information
     </select>
 
-    <delete id="delete" parameterType="java.lang.Integer">
-        DELETE FROM produce.produce_information WHERE produceId = #{produceId};
-    </delete>
+    <update id="delete" parameterType="java.lang.Integer">
+        UPDATE produce.produce_information, produce.produce_function, produce.produce_device
+        set produce_information.isDelete = 1, produce_function.isDelete = 1, produce_device.isDelete = 1
+        WHERE produce_information.produceId = #{produceId}
+          and produce_function.produceId = #{produceId}
+          and produce_device.produceId = #{produceId}
+    </update>
+
+    <select id="getProduceNameList" resultType="java.lang.String">
+        SELECT produceName FROM produce.produce_information
+    </select>
+
+    <select id="getProduceNameList2" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT produceName FROM produce.produce_information WHERE produceId != #{produceId}
+    </select>
 
 </mapper>

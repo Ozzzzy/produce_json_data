@@ -1,5 +1,7 @@
 package com.example.produce.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -9,9 +11,14 @@ import java.util.Date;
 public class ProduceData {
 
     private int dataId;
+
     private int deviceId;
+
     private int functionId;
+
     private String dataString;
+
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
     public int getDataId() {

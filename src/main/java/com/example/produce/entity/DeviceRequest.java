@@ -1,42 +1,28 @@
 package com.example.produce.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 /**
  * @author hou
- * @date 2020/8/21
+ * @date 2020/8/24
  */
-public class ProduceDevice {
-
-    private int deviceId;
-
+public class DeviceRequest {
+    private String deviceId;
     private String deviceIdentification;
-
     private String deviceName;
-
     private String onlineStatus;
-
     private String activationState;
-
-    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date createTime;
-
-    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date activeTime;
-
+    private String createTime;
+    private String activeTime;
     private String enableStatus;
-
     private String deviceAddress;
+    private String produceId;
 
-    private int produceId;
-
-    public int getDeviceId() {
+    public String getDeviceId() {
         return deviceId;
     }
 
-    public void setDeviceId(int deviceId) {
+    public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
     }
 
@@ -72,19 +58,19 @@ public class ProduceDevice {
         this.activationState = activationState;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public Date getActiveTime() {
+    public String getActiveTime() {
         return activeTime;
     }
 
-    public void setActiveTime(Date activeTime) {
+    public void setActiveTime(String activeTime) {
         this.activeTime = activeTime;
     }
 
@@ -104,11 +90,11 @@ public class ProduceDevice {
         this.deviceAddress = deviceAddress;
     }
 
-    public int getProduceId() {
+    public String getProduceId() {
         return produceId;
     }
 
-    public void setProduceId(int produceId) {
+    public void setProduceId(String produceId) {
         this.produceId = produceId;
     }
 }

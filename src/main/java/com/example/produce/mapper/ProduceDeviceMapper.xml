@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.produce.mapper.ProduceDeviceMapper">
+
+    <insert id="add" parameterType="com.example.produce.entity.DeviceRequest"
+            useGeneratedKeys="true">
+        INSERT INTO produce.produce_device
+            (deviceIdentification,
+             deviceName,
+             onlineStatus,
+             activationState,
+             createTime,
+             activeTime,
+             enableStatus,
+             deviceAddress,
+             produceId)
+        VALUES
+        (#{deviceIdentification},
+         #{deviceName},
+         #{onlineStatus},
+         #{activationState},
+         #{createTime},
+         #{activeTime},
+         #{enableStatus},
+         #{deviceAddress},
+         #{produceId})
+    </insert>
+
+    <update id="modify" parameterType="com.example.produce.entity.DeviceRequest"
+            useGeneratedKeys="true">
+        UPDATE produce.produce_device SET deviceIdentification = #{deviceIdentification},
+                                          deviceName = #{deviceName},
+                                          onlineStatus = #{onlineStatus},
+                                          activationState = #{activationState},
+                                          createTime = #{createTime},
+                                          activeTime = #{activeTime},
+                                          enableStatus = #{enableStatus},
+                                          deviceAddress = #{deviceAddress},
+                                          produceId = #{produceId}
+        WHERE deviceId = #{deviceId} and isDelete = 0
+    </update>
+
+    <select id="details" parameterType="java.lang.Integer"
+            resultType="com.example.produce.entity.ProduceDevice">
+        SELECT deviceId,
+               deviceIdentification,
+               deviceName,
+               onlineStatus,
+               activationState,
+               DATE_FORMAT(createTime,'%Y-%m-%d %H:%i:%S') AS createTime,
+               DATE_FORMAT(activeTime,'%Y-%m-%d %H:%i:%S') AS activeTime,
+               enableStatus,
+               deviceAddress,
+               produceId
+        FROM produce.produce_device WHERE deviceId = #{deviceId} and isDelete = 0
+    </select>
+
+    <update id="delete" parameterType="java.lang.Integer">
+        UPDATE produce.produce_device,produce.produce_data set produce_device.isDelete = 1, produce_data.isDelete = 1
+        WHERE produce_device.deviceId = #{deviceId} and produce_data.deviceId = #{deviceId}
+    </update>
+
+    <select id="deviceList" parameterType="com.example.produce.entity.DeviceRequest"
+            resultType="com.example.produce.entity.ProduceDevice">
+        SELECT deviceId,
+               deviceIdentification,
+               deviceName,
+               onlineStatus,
+               activationState,
+               DATE_FORMAT(createTime,'%Y-%m-%d %H:%i:%S') AS createTime,
+               DATE_FORMAT(activeTime,'%Y-%m-%d %H:%i:%S') AS activeTime,
+               enableStatus,
+               deviceAddress,
+               produceId
+        FROM produce.produce_device
+        WHERE isDelete = 0
+            <if test="deviceIdentification != null">
+                and deviceIdentification = #{deviceIdentification}
+            </if>
+            <if test="deviceName != null">
+                and deviceName = #{deviceName}
+            </if>
+            <if test="onlineStatus != null">
+                and onlineStatus = #{onlineStatus}
+            </if>
+            <if test="activationState != null">
+                and activationState = #{activationState}
+            </if>
+            <if test="createTime != null">
+                and createTime = #{createTime}
+            </if>
+            <if test="activeTime != null">
+                and activeTime = #{activeTime}
+            </if>
+            <if test="enableStatus != null">
+                and enableStatus = #{enableStatus}
+            </if>
+            <if test="deviceAddress != null">
+                and deviceAddress = #{deviceAddress}
+            </if>
+            <if test="produceId != null">
+                and produceId = #{produceId}
+            </if>
+    </select>
+
+    <select id="getFunctionByDevice" parameterType="com.example.produce.entity.ProduceDevice"
+            resultType="com.example.produce.entity.ProduceFunction">
+        SELECT functionId,
+               functionType,
+               functionName,
+               fieldName,
+               transportType,
+               functionDescription,
+               produceId
+        FROM produce.produce_function WHERE produceId = #{produceId} and isDelete = 0
+    </select>
+
+    <select id="getDataListByFunction" parameterType="com.example.produce.entity.ProduceData"
+            resultType="com.example.produce.entity.ProduceData">
+        SELECT dataId, deviceId, functionId, dataString, createTime
+        from produce.produce_data WHERE deviceId = #{deviceId} and functionId = #{functionId} and isDelete = 0
+    </select>
+
+    <select id="getNameListByProduceId" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT deviceName
+        from produce.produce_device WHERE produceId = #{produceId} and isDelete = 0
+    </select>
+
+    <select id="getNameListByProduceId2" parameterType="com.example.produce.entity.SelectRequest" resultType="java.lang.String">
+        SELECT deviceName
+        from produce.produce_device WHERE produceId = #{produceId} and deviceId != #{anotherId}
+    </select>
+
+    <select id="getDeviceIdListByProduceId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT deviceId from produce.produce_device WHERE produceId = #{produceId}
+    </select>
+
+</mapper>
