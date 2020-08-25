@@ -7,6 +7,7 @@ import java.util.Date;
  * @date 2020/8/24
  */
 public class DeviceRequest {
+
     private String deviceId;
     private String deviceIdentification;
     private String deviceName;

@@ -15,6 +15,7 @@ import java.util.List;
  * @author hou
  * @date 2020/8/24
  */
+
 @RestController
 public class ProduceDeviceController {
 
@@ -93,7 +94,6 @@ public class ProduceDeviceController {
             JsonReader jsonReader = new JsonReader();
             DeviceRequest deviceRequest = jsonReader.getDeviceRequest(jsonString).get(0);
             return produceDeviceService.findPage(pageNum,pageSize,deviceRequest);
-
         }catch (Exception e){
             e.printStackTrace();
             return null;

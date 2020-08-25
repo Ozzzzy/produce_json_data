@@ -16,5 +16,4 @@ public interface ProduceDataMapper {
      * @return
      */
     int add(DataRequest dataRequest);
-
 }

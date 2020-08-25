@@ -34,6 +34,7 @@ public class ProduceDataService {
      * @return
      */
     public String addData(DataRequest dataRequest){
+
         int deviceId = Integer.parseInt(dataRequest.getDeviceId());
         int functionId = Integer.parseInt(dataRequest.getFunctionId());
         ProduceFunction produceFunction = produceFunctionMapper.details(functionId);

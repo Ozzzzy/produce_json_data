@@ -26,7 +26,6 @@ public class ProduceDeviceService {
     @Autowired
     private ProduceInformationMapper produceInformationMapper;
 
-
     /**
      * 1. 添加设备
      * @param deviceRequest

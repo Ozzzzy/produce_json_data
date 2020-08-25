@@ -31,11 +31,9 @@ public class ProduceDataController {
             JsonReader jsonReader = new JsonReader();
             DataRequest dataRequest = jsonReader.getDataRequest(jsonString).get(0);
             return produceDataService.addData(dataRequest);
-
         }catch (Exception e){
             e.printStackTrace();
             return "wrong";
-
         }
     }
 }

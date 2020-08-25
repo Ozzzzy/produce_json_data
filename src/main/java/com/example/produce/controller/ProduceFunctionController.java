@@ -26,7 +26,6 @@ public class ProduceFunctionController {
             JsonReader jsonReader = new JsonReader();
             ProduceFunction produceFunction = jsonReader.getFunctionList(jsonString).get(0);
             return produceFunctionService.addFunction(produceFunction);
-
         }catch (Exception e){
             e.printStackTrace();
             return "wrong";
@@ -39,7 +38,6 @@ public class ProduceFunctionController {
             JsonReader jsonReader = new JsonReader();
             ProduceFunction produceFunction = jsonReader.getFunctionList(jsonString).get(0);
             return produceFunctionService.modifyFunction(produceFunction);
-
         }catch (Exception e){
             e.printStackTrace();
             return "wrong";
@@ -50,7 +48,6 @@ public class ProduceFunctionController {
     public @ResponseBody ProduceFunction details(int functionId)throws Exception{
         try {
             return produceFunctionService.detailsFunction(functionId);
-
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -61,7 +58,6 @@ public class ProduceFunctionController {
     public @ResponseBody List<ProduceFunction> functionList()throws Exception{
         try {
             return produceFunctionService.functionList();
-
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -82,7 +78,6 @@ public class ProduceFunctionController {
     public PageInfo pageProduceInfo(@RequestParam int pageNum, @RequestParam int pageSize)throws Exception{
         try {
             return produceFunctionService.findPage(pageNum,pageSize);
-
         }catch (Exception e){
             e.printStackTrace();
             return null;

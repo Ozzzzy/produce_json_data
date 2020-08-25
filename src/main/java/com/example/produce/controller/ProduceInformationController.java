@@ -48,7 +48,6 @@ public class ProduceInformationController {
     public @ResponseBody ProduceInformation details(int produceId)throws Exception{
         try {
             return produceInformationService.detailsProduce(produceId);
-
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -59,7 +58,6 @@ public class ProduceInformationController {
     public @ResponseBody List<ProduceInformation> produceList()throws Exception{
         try {
             return produceInformationService.produceList();
-
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -80,7 +78,6 @@ public class ProduceInformationController {
     public PageInfo pageProduceInfo(@RequestParam int pageNum, @RequestParam int pageSize)throws Exception{
         try {
             return produceInformationService.findPage(pageNum,pageSize);
-
         }catch (Exception e){
             e.printStackTrace();
             return null;

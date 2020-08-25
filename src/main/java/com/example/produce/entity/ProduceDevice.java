@@ -32,6 +32,7 @@ public class ProduceDevice {
 
     private int produceId;
 
+
     public int getDeviceId() {
         return deviceId;
     }

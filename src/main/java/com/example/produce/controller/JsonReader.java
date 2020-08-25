@@ -18,7 +18,6 @@ import java.util.List;
  */
 public class JsonReader {
 
-
     /**
      * String -->  Date
      * @param time
@@ -34,8 +33,6 @@ public class JsonReader {
         }
         return dateTime;
     }
-
-
 
     /**
      * 读取 JSON 到 ProduceInformation 实体
@@ -73,18 +70,6 @@ public class JsonReader {
 
         return produceInformation;
     }
-
-
-
-//    public WeatherRequest addToListWeatherRequest(JSONObject jo){
-//        WeatherRequest weatherRequest = new WeatherRequest();
-//        if (jo.get("createTime") != null && jo.get("createTime") != ""){
-//            weatherRequest.setCreateTime(getDateTime(jo.get("createTime").toString()));
-//        }
-//        return weatherRequest;
-//    }
-
-
 
     /**
      * 生成 List<>ProductionInformation>
@@ -135,7 +120,6 @@ public class JsonReader {
 
         return produceFunction;
     }
-
 
     /**
      * 生成 List<ProductionFunction>
@@ -194,7 +178,6 @@ public class JsonReader {
         return produceDevice;
     }
 
-
     /**
      * 生成 List<ProductionDevice>
      * @param jsonString
@@ -252,7 +235,6 @@ public class JsonReader {
         return deviceRequest;
     }
 
-
     /**
      * 生成 List<DeviceRequest>
      * @param jsonString
@@ -269,7 +251,7 @@ public class JsonReader {
     }
 
     /**
-     * 读取 JSON 到 DataRequest 实体
+     * 读取 JSON 对象到 DataRequest 实体
      * @param jo
      * @return
      */
@@ -294,7 +276,6 @@ public class JsonReader {
         }
         return dataRequest;
     }
-
 
     /**
      * 生成 List<DataRequest>
