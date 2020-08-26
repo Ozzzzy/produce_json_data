@@ -60,4 +60,15 @@ public class ProduceData {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+    public ProduceData(){
+
+    }
+
+    public ProduceData(int deviceId, int functionId, String dataString, Date createTime){
+        this.deviceId = deviceId;
+        this.functionId = functionId;
+        this.dataString = dataString;
+        this.createTime = createTime;
+    }
 }

@@ -1,7 +1,10 @@
 package com.example.produce.mapper;
 
 import com.example.produce.entity.DataRequest;
+import com.example.produce.entity.ProduceData;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * @author hou
@@ -16,4 +19,11 @@ public interface ProduceDataMapper {
      * @return
      */
     int add(DataRequest dataRequest);
+
+    /**
+     * 批量插入数据
+     * @param dataRequests
+     * @return
+     */
+    int batchInsert(List<ProduceData> dataRequests);
 }

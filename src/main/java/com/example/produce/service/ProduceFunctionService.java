@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -106,6 +108,24 @@ public class ProduceFunctionService {
         List<ProduceFunction> produceFunctionList = this.produceFunctionMapper.functionList();
         PageInfo pageInfo = new PageInfo(produceFunctionList);
         return pageInfo;
+    }
+
+
+    /**
+     * 7. 通过产品 Id 获取功能的 name 和 Id 键值对
+     * @param produceId
+     * @return
+     */
+    public HashMap<String, Integer> getHashTableNameAndId(int produceId){
+        HashMap<String, Integer> functionNameAndId = new HashMap<>();
+        List<ProduceFunction> produceFunctionList = produceFunctionMapper.functionListOfOne(produceId);
+        for(int i = 0 ; i < produceFunctionList.size() ; i ++){
+            ProduceFunction produceFunction = produceFunctionList.get(i);
+            String functionName = produceFunction.getFunctionName();
+            Integer functionId = produceFunction.getFunctionId();
+            functionNameAndId.put(functionName,functionId);
+        }
+        return functionNameAndId;
     }
 
 }

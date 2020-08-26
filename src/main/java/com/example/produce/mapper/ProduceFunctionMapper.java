@@ -5,6 +5,8 @@ import com.example.produce.entity.ProduceInformation;
 import com.example.produce.entity.SelectRequest;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -68,4 +70,12 @@ public interface ProduceFunctionMapper {
      * @return
      */
     int[] getFunctionIdListByProduceId(int produceId);
+
+    /**
+     * 9. 通过产品Id获取功能列表
+     * @param produceId
+     * @return
+     */
+    List<ProduceFunction> functionListOfOne(int produceId);
+
 }

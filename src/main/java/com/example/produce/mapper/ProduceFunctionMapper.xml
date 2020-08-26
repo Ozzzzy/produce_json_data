@@ -75,4 +75,15 @@
     <select id="getFunctionIdListByProduceId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
         SELECT functionId FROM produce.produce_function WHERE produceId = #{produceId}
     </select>
+
+    <select id="functionListOfOne" parameterType="java.lang.Integer" resultType="com.example.produce.entity.ProduceFunction">
+        SELECT functionId,
+               functionType,
+               functionName,
+               fieldName,
+               transportType,
+               functionDescription,
+               produceId
+        FROM produce.produce_function WHERE isDelete = 0 and produceId = #{produceId}
+    </select>
 </mapper>

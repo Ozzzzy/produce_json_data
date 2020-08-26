@@ -1,6 +1,7 @@
 package com.example.produce.service;
 
 import com.example.produce.entity.DataRequest;
+import com.example.produce.entity.ProduceData;
 import com.example.produce.entity.ProduceDevice;
 import com.example.produce.entity.ProduceFunction;
 import com.example.produce.mapper.ProduceDataMapper;
@@ -9,6 +10,9 @@ import com.example.produce.mapper.ProduceFunctionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author hou
@@ -54,5 +58,37 @@ public class ProduceDataService {
             }
         }
         return "数据添加失败，失败原因：功能不存在。";
+    }
+
+    /**
+     * 批量插入
+     * @param listAll
+     * @param batchSize
+     * @return
+     */
+    public String batchInsert(List<ProduceData> listAll, int batchSize){
+        int listAllSize = listAll.size();
+        List<ProduceData> produceDataList = new ArrayList<>();
+        for(int j = 0 ; j < listAllSize; j += batchSize){
+            if( j + batchSize <= listAllSize ){
+                produceDataList.addAll(listAll.subList(j,j + batchSize));
+                try {
+                    produceDataMapper.batchInsert(produceDataList);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                produceDataList.clear();
+            }
+            else {
+                produceDataList.addAll(listAll.subList(j,listAllSize));
+                try {
+                    produceDataMapper.batchInsert(produceDataList);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                produceDataList.clear();
+            }
+        }
+        return "批量插入成功!";
     }
 }

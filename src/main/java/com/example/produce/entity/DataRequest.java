@@ -1,5 +1,7 @@
 package com.example.produce.entity;
 
+import java.util.Date;
+
 /**
  * @author hou
  * @date 2020/8/24
@@ -11,6 +13,10 @@ public class DataRequest {
     private String functionId;
     private String dataString;
     private String createTime;
+
+    public DataRequest(){
+
+    }
 
     public String getDataId() {
         return dataId;

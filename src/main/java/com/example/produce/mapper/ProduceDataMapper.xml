@@ -8,4 +8,12 @@
         INSERT INTO produce.produce_data (deviceId, functionId, dataString, createTime)
         VALUES (#{deviceId},#{functionId},#{dataString},#{createTime})
     </insert>
+
+    <insert id="batchInsert" parameterType="java.util.List" >
+        INSERT INTO produce.produce_data (deviceId, functionId, dataString, createTime)
+        VALUES
+        <foreach collection ="list" item="list" index= "index" separator =",">
+            (#{list.deviceId},#{list.functionId},#{list.dataString},#{list.createTime})
+        </foreach>
+    </insert>
 </mapper>
