@@ -63,18 +63,18 @@ public interface ProduceDeviceMapper {
     List<ProduceData> getDataListByFunction(int deviceId, int functionId);
 
     /**
-     * 8. 通过产品Id获取设备名称列表
-     * @param produceId
+     * 8. 获取同产品下设备名称同名数 用于添加
+     * @param deviceRequest
      * @return
      */
-    String[] getNameListByProduceId(int produceId);
+    int getSameNameCount(DeviceRequest deviceRequest);
 
     /**
-     * 9. 通过产品Id获取除此deviceId之外的设备名称列表
-     * @param selectRequest
+     * 9. 获取同产品下除此设备外设备名称同名数 用于修改
+     * @param deviceRequest
      * @return
      */
-    String[] getNameListByProduceId2(SelectRequest selectRequest);
+    int getSameNameCount2(DeviceRequest deviceRequest);
 
     /**
      * 10. 通过产品Id获取deviceId列表

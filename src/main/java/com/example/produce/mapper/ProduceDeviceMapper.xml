@@ -123,14 +123,16 @@
         from produce.produce_data WHERE deviceId = #{deviceId} and functionId = #{functionId} and isDelete = 0
     </select>
 
-    <select id="getNameListByProduceId" parameterType="java.lang.Integer" resultType="java.lang.String">
-        SELECT deviceName
-        from produce.produce_device WHERE produceId = #{produceId} and isDelete = 0
+    <select id="getSameNameCount" parameterType="com.example.produce.entity.DeviceRequest" resultType="java.lang.Integer">
+        SELECT count(*) as sameName
+        FROM produce.produce_device
+        WHERE produceId = #{produceId} and deviceName = #{deviceName} and isDelete = 0
     </select>
 
-    <select id="getNameListByProduceId2" parameterType="com.example.produce.entity.SelectRequest" resultType="java.lang.String">
-        SELECT deviceName
-        from produce.produce_device WHERE produceId = #{produceId} and deviceId != #{anotherId} and isDelete = 0
+    <select id="getSameNameCount2" parameterType="com.example.produce.entity.DeviceRequest" resultType="java.lang.Integer">
+    SELECT count(*) as sameName2
+    FROM produce.produce_device
+    WHERE produceId = #{produceId} and deviceId != #{deviceId} and deviceName = #{deviceName} and isDelete = 0
     </select>
 
     <select id="getDeviceIdListByProduceId" parameterType="java.lang.Integer" resultType="java.lang.Integer">

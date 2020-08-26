@@ -42,8 +42,8 @@ public class ProduceInformationService {
      */
     public String addProduce(ProduceInformation produceInformation){
         String produceName = produceInformation.getProduceName();
-        String[] produceNameList = produceInformationMapper.getProduceNameList();
-        if(Arrays.asList(produceNameList).contains(produceName)){
+        int sameNameCount = produceInformationMapper.getSameNameCount(produceName);
+        if(sameNameCount > 0){
             return "产品添加失败，失败原因：此产品名称已存在。";
         }else {
             produceInformationMapper.add(produceInformation);
@@ -57,10 +57,8 @@ public class ProduceInformationService {
      * @return
      */
     public String modifyProduce(ProduceInformation produceInformation){
-        String produceName = produceInformation.getProduceName();
-        int produceId = produceInformation.getProduceId();
-        String[] produceNameList = produceInformationMapper.getProduceNameList2(produceId);
-        if(Arrays.asList(produceNameList).contains(produceName)){
+        int sameNameCount = produceInformationMapper.getSameNameCount2(produceInformation);
+        if(sameNameCount > 0){
             return "产品信息修改失败，失败原因：此产品名称已存在。";
         }else {
             produceInformationMapper.modify(produceInformation);

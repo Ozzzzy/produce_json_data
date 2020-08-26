@@ -62,14 +62,16 @@
         WHERE produce_function.functionId = #{functionId}
     </update>
 
-    <select id="getNameListByProduceId" parameterType="java.lang.Integer" resultType="java.lang.String">
-        SELECT functionName
-        from produce.produce_function WHERE produceId = #{produceId} and isDelete = 0
+    <select id="getSameNameCount" parameterType="com.example.produce.entity.ProduceFunction" resultType="java.lang.Integer">
+        SELECT count(*) as sameName
+        FROM produce.produce_function
+        WHERE produceId = #{produceId} and functionName = #{functionName} and isDelete = 0
     </select>
 
-    <select id="getNameListByProduceId2" parameterType="com.example.produce.entity.SelectRequest" resultType="java.lang.String">
-        SELECT functionName
-        from produce.produce_function WHERE produceId = #{produceId} and functionId != #{anotherId} and isDelete = 0
+    <select id="getSameNameCount2" parameterType="com.example.produce.entity.ProduceFunction" resultType="java.lang.Integer">
+        SELECT count(*) as sameName2
+        FROM produce.produce_function
+        WHERE produceId = #{produceId} and functionId != #{functionId} and functionName = #{functionName} and isDelete = 0
     </select>
 
     <select id="getFunctionIdListByProduceId" parameterType="java.lang.Integer" resultType="java.lang.Integer">

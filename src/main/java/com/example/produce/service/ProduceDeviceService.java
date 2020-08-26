@@ -37,11 +37,9 @@ public class ProduceDeviceService {
      */
     public String addDevice(DeviceRequest deviceRequest) {
         int produceId = Integer.parseInt(deviceRequest.getProduceId());
-        ProduceInformation produceInformation = produceInformationMapper.details(produceId);
-        String deviceName = deviceRequest.getDeviceName();
-        String[] deviceNameList = produceDeviceMapper.getNameListByProduceId(produceId);
-        if(produceInformation != null){
-            if(Arrays.asList(deviceNameList).contains(deviceName)){
+        int sameNameCount = produceDeviceMapper.getSameNameCount(deviceRequest);
+        if(produceInformationMapper.details(produceId) != null){
+            if(sameNameCount > 0){
                 return "设备添加失败，失败原因：此设备的名称已存在。";
             }else {
                 produceDeviceMapper.add(deviceRequest);
@@ -58,12 +56,8 @@ public class ProduceDeviceService {
      * @return
      */
     public String modifyDevice(DeviceRequest deviceRequest) {
-        String deviceName = deviceRequest.getDeviceName();
-        int produceId = Integer.parseInt(deviceRequest.getProduceId());
-        int deviceId = Integer.parseInt(deviceRequest.getDeviceId());
-        SelectRequest selectRequest = new SelectRequest(produceId,deviceId);
-        String[] deviceNameList = produceDeviceMapper.getNameListByProduceId2(selectRequest);
-        if(Arrays.asList(deviceNameList).contains(deviceName)){
+        int sameNameCount = produceDeviceMapper.getSameNameCount2(deviceRequest);
+        if(sameNameCount > 0){
             return "设备信息修改失败，失败原因：此产品下的设备名称已存在！";
         }else {
             produceDeviceMapper.modify(deviceRequest);

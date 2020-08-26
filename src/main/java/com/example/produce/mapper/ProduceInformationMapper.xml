@@ -59,7 +59,7 @@
                networkingMode,
                produceModel,
                produceDescription
-        FROM produce.produce_information
+        FROM produce.produce_information WHERE isDelete = 0
     </select>
 
     <update id="delete" parameterType="java.lang.Integer">
@@ -67,12 +67,14 @@
         WHERE produce_information.produceId = #{produceId}
     </update>
 
-    <select id="getProduceNameList" resultType="java.lang.String">
-        SELECT produceName FROM produce.produce_information
+    <select id="getSameNameCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(*) as sameName FROM produce.produce_information WHERE produceName = #{produceName} and isDelete = 0
     </select>
 
-    <select id="getProduceNameList2" parameterType="java.lang.Integer" resultType="java.lang.String">
-        SELECT produceName FROM produce.produce_information WHERE produceId != #{produceId}
+    <select id="getSameNameCount2" parameterType="com.example.produce.entity.ProduceInformation" resultType="java.lang.Integer">
+        SELECT count(*) as sameName2
+        FROM produce.produce_information
+        WHERE produceId != #{produceId} and produceName = #{produceName} and isDelete = 0
     </select>
 
 </mapper>

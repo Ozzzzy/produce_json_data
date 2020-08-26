@@ -1,12 +1,8 @@
 package com.example.produce.mapper;
 
 import com.example.produce.entity.ProduceFunction;
-import com.example.produce.entity.ProduceInformation;
-import com.example.produce.entity.SelectRequest;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -51,18 +47,18 @@ public interface ProduceFunctionMapper {
     int delete(int functionId);
 
     /**
-     * 6. 通过产品Id获取功能名称列表
-     * @param produceId
+     * 6. 获取同产品下功能名称同名数 用于添加
+     * @param produceFunction
      * @return
      */
-    String[] getNameListByProduceId(int produceId);
+    int getSameNameCount(ProduceFunction produceFunction);
 
     /**
-     * 7. 通过产品Id获取除此functionId之外的功能名称列表
-     * @param selectRequest
+     * 7. 获取同产品下除此功能名称之外的同名数 用于修改
+     * @param produceFunction
      * @return
      */
-    String[] getNameListByProduceId2(SelectRequest selectRequest);
+    int getSameNameCount2(ProduceFunction produceFunction);
 
     /**
      * 8. 通过产品Id获取功能Id列表

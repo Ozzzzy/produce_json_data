@@ -1,7 +1,6 @@
 package com.example.produce.service;
 
 import com.example.produce.entity.ProduceFunction;
-import com.example.produce.entity.SelectRequest;
 import com.example.produce.mapper.ProduceDataMapper;
 import com.example.produce.mapper.ProduceFunctionMapper;
 import com.example.produce.mapper.ProduceInformationMapper;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,10 +37,9 @@ public class ProduceFunctionService {
      */
     public String addFunction(ProduceFunction produceFunction){
         int produceId = produceFunction.getProduceId();
-        String functionName = produceFunction.getFunctionName();
-        String[] functionNameList = produceFunctionMapper.getNameListByProduceId(produceId);
+        int sameNameCount = produceFunctionMapper.getSameNameCount(produceFunction);
         if(produceInformationMapper.details(produceId) != null){
-            if(Arrays.asList(functionNameList).contains(functionName)){
+            if(sameNameCount > 0){
                 return "功能添加失败，失败原因：此功能的名称已存在。";
             }else {
                 produceFunctionMapper.add(produceFunction);
@@ -60,12 +57,8 @@ public class ProduceFunctionService {
      */
     public String modifyFunction(ProduceFunction produceFunction){
 
-        int produceId = produceFunction.getProduceId();
-        int functionId = produceFunction.getFunctionId();
-        SelectRequest selectRequest = new SelectRequest(produceId,functionId);
-        String functionName = produceFunction.getFunctionName();
-        String[] functionNameList = produceFunctionMapper.getNameListByProduceId2(selectRequest);
-        if(Arrays.asList(functionNameList).contains(functionName)){
+        int sameNameCount = produceFunctionMapper.getSameNameCount2(produceFunction);
+        if(sameNameCount > 0){
             return "功能信息修改失败，失败原因：此产品下的功能名称已存在！";
         }else {
             produceFunctionMapper.modify(produceFunction);

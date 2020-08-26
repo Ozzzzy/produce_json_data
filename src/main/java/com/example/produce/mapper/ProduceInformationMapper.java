@@ -48,15 +48,16 @@ public interface ProduceInformationMapper {
     int delete(int produceId);
 
     /**
-     * 6. 获取产品名称列表
+     * 6. 获取与此产品名称相同的数目 用于添加
+     * @param produceName
      * @return
      */
-    String[] getProduceNameList();
+    int getSameNameCount(String produceName);
 
     /**
-     * 7. 获取除此产品id以外的名称列表
-     * @param produceId
+     * 7. 获取除此产品名称以外的名称同名数 用于修改
+     * @param produceInformation
      * @return
      */
-    String[] getProduceNameList2(int produceId);
+    int getSameNameCount2(ProduceInformation produceInformation);
 }
