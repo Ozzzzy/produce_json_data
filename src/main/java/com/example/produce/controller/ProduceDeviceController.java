@@ -108,7 +108,12 @@ public class ProduceDeviceController {
 
     @RequestMapping(value = "/getDataListByFunction" ,produces = "application/json; charset=UTF-8",
             method = RequestMethod.POST)
-    public List<ProduceData> getDataListByFunction(int deviceId, int functionId){
-        return produceDeviceService.getDataListByFunction(deviceId, functionId);
+    public PageInfo getDataListByFunction(int deviceId, int functionId, int pageNum, int pageSize){
+        try {
+            return produceDeviceService.findPageData(pageNum,pageSize,deviceId,functionId);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

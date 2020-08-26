@@ -115,7 +115,7 @@ public class ProduceDeviceService {
     }
 
     /**
-     * 分页查询
+     * 分页查询设备
      * @param pageNum
      * @param pageSize
      * @return
@@ -127,4 +127,16 @@ public class ProduceDeviceService {
         return pageInfo;
     }
 
+    /**
+     * 分页查询设备
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    public PageInfo findPageData(int pageNum, int pageSize,int deviceId, int functionId){
+        PageHelper.startPage(pageNum,pageSize);
+        List<ProduceData> produceDataList = produceDeviceMapper.getDataListByFunction(deviceId,functionId);
+        PageInfo pageInfo = new PageInfo(produceDataList);
+        return pageInfo;
+    }
 }
