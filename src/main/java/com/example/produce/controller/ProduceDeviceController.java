@@ -17,6 +17,7 @@ import java.util.List;
  */
 
 @RestController
+@RequestMapping(value = "/device", produces = "application/json;charset=UTF-8",method = RequestMethod.POST)
 public class ProduceDeviceController {
 
     @Autowired

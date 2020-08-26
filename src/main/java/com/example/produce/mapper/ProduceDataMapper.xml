@@ -16,4 +16,12 @@
             (#{list.deviceId},#{list.functionId},#{list.dataString},#{list.createTime})
         </foreach>
     </insert>
+
+    <update id="deleteByDeviceId" parameterType="java.lang.Integer">
+        UPDATE produce.produce_data set produce_data.isDelete = 1 where deviceId = #{deviceId}
+    </update>
+    <update id="deleteByFunctionId" parameterType="java.lang.Integer">
+        UPDATE produce.produce_data set produce_data.isDelete = 1 where functionId = #{functionId}
+    </update>
+
 </mapper>

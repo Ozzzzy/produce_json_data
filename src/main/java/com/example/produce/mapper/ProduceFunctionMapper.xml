@@ -58,8 +58,8 @@
     </select>
 
     <update id="delete" parameterType="java.lang.Integer">
-        UPDATE produce.produce_function,produce.produce_data set produce_function.isDelete = 1 ,produce_data.isDelete = 1
-        WHERE produce_function.functionId = #{functionId} and produce_data.functionId = #{functionId}
+        UPDATE produce.produce_function set produce_function.isDelete = 1
+        WHERE produce_function.functionId = #{functionId}
     </update>
 
     <select id="getNameListByProduceId" parameterType="java.lang.Integer" resultType="java.lang.String">
@@ -73,7 +73,7 @@
     </select>
 
     <select id="getFunctionIdListByProduceId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        SELECT functionId FROM produce.produce_function WHERE produceId = #{produceId}
+        SELECT functionId FROM produce.produce_function WHERE produceId = #{produceId} and isDelete = 0
     </select>
 
     <select id="functionListOfOne" parameterType="java.lang.Integer" resultType="com.example.produce.entity.ProduceFunction">

@@ -2,6 +2,7 @@ package com.example.produce.service;
 
 import com.example.produce.entity.ProduceFunction;
 import com.example.produce.entity.SelectRequest;
+import com.example.produce.mapper.ProduceDataMapper;
 import com.example.produce.mapper.ProduceFunctionMapper;
 import com.example.produce.mapper.ProduceInformationMapper;
 import com.github.pagehelper.PageHelper;
@@ -12,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -28,6 +28,9 @@ public class ProduceFunctionService {
 
     @Autowired
     private ProduceInformationMapper produceInformationMapper;
+
+    @Autowired
+    private ProduceDataMapper produceDataMapper;
 
     /**
      * 1. 添加功能
@@ -94,6 +97,7 @@ public class ProduceFunctionService {
      */
     public String deleteFunction(int functionId){
         produceFunctionMapper.delete(functionId);
+        produceDataMapper.deleteByFunctionId(functionId);
         return "删除功能成功！";
     }
 

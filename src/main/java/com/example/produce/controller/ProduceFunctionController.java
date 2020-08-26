@@ -14,6 +14,7 @@ import java.util.List;
  */
 
 @RestController
+@RequestMapping(value = "/function", produces = "application/json;charset=UTF-8",method = RequestMethod.POST)
 public class ProduceFunctionController {
 
     @Autowired

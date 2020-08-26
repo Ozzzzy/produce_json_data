@@ -58,8 +58,8 @@
     </select>
 
     <update id="delete" parameterType="java.lang.Integer">
-        UPDATE produce.produce_device,produce.produce_data set produce_device.isDelete = 1, produce_data.isDelete = 1
-        WHERE produce_device.deviceId = #{deviceId} and produce_data.deviceId = #{deviceId}
+        UPDATE produce.produce_device set produce_device.isDelete = 1
+        WHERE produce_device.deviceId = #{deviceId}
     </update>
 
     <select id="deviceList" parameterType="com.example.produce.entity.DeviceRequest"
@@ -130,11 +130,11 @@
 
     <select id="getNameListByProduceId2" parameterType="com.example.produce.entity.SelectRequest" resultType="java.lang.String">
         SELECT deviceName
-        from produce.produce_device WHERE produceId = #{produceId} and deviceId != #{anotherId}
+        from produce.produce_device WHERE produceId = #{produceId} and deviceId != #{anotherId} and isDelete = 0
     </select>
 
     <select id="getDeviceIdListByProduceId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        SELECT deviceId from produce.produce_device WHERE produceId = #{produceId}
+        SELECT deviceId from produce.produce_device WHERE produceId = #{produceId} and isDelete = 0
     </select>
 
 </mapper>

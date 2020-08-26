@@ -1,6 +1,7 @@
 package com.example.produce.service;
 
 import com.example.produce.entity.*;
+import com.example.produce.mapper.ProduceDataMapper;
 import com.example.produce.mapper.ProduceDeviceMapper;
 import com.example.produce.mapper.ProduceInformationMapper;
 import com.github.pagehelper.PageHelper;
@@ -25,6 +26,9 @@ public class ProduceDeviceService {
 
     @Autowired
     private ProduceInformationMapper produceInformationMapper;
+
+    @Autowired
+    private ProduceDataMapper produceDataMapper;
 
     /**
      * 1. 添加设备
@@ -83,6 +87,7 @@ public class ProduceDeviceService {
      */
     public String deleteDevice(int deviceId){
         produceDeviceMapper.delete(deviceId);
+        produceDataMapper.deleteByDeviceId(deviceId);
         return "删除设备成功！";
     }
 

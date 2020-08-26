@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,6 +20,7 @@ import java.util.List;
  * @date 2020/8/24
  */
 @RestController
+@RequestMapping(value = "/data", produces = "application/json;charset=UTF-8",method = RequestMethod.POST)
 public class ProduceDataController {
 
     @Autowired
@@ -53,7 +53,7 @@ public class ProduceDataController {
         try {
             FileUtils.writeByteArrayToFile(new File("D:/upload/" + file.getOriginalFilename()), file.getBytes());
             String fileAddress = "D:/upload/" + file.getOriginalFilename();
-            //String fileAddress = "D:\\upload\\weather.xlsx";
+            //String fileAddress = "D:\\upload\\weather.xlsx"; 放配置文件里面
             int produceId = produceDeviceService.detailsDevice(deviceId).getProduceId();
             HashMap<String,Integer> hashTableNameAndId = produceFunctionService.getHashTableNameAndId(produceId);
             List<ProduceData> produceDataList = ExcelReader.readExcel(fileAddress,deviceId,hashTableNameAndId);

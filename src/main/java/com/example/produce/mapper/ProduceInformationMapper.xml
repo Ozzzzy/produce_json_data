@@ -63,11 +63,8 @@
     </select>
 
     <update id="delete" parameterType="java.lang.Integer">
-        UPDATE produce.produce_information, produce.produce_function, produce.produce_device
-        set produce_information.isDelete = 1, produce_function.isDelete = 1, produce_device.isDelete = 1
+        UPDATE produce.produce_information set produce_information.isDelete = 1
         WHERE produce_information.produceId = #{produceId}
-          and produce_function.produceId = #{produceId}
-          and produce_device.produceId = #{produceId}
     </update>
 
     <select id="getProduceNameList" resultType="java.lang.String">

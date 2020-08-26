@@ -26,4 +26,18 @@ public interface ProduceDataMapper {
      * @return
      */
     int batchInsert(List<ProduceData> dataRequests);
+
+    /**
+     * 删除设备Id为 deviceId 下的数据
+     * @param deviceId
+     * @return
+     */
+    int deleteByDeviceId(int deviceId);
+
+    /**
+     * 删除功能Id为 functionId 下的数据
+     * @param functionId
+     * @return
+     */
+    int deleteByFunctionId(int functionId);
 }

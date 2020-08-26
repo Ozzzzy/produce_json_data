@@ -1,6 +1,7 @@
 package com.example.produce.service;
 
 import com.example.produce.entity.ProduceInformation;
+import com.example.produce.mapper.ProduceDataMapper;
 import com.example.produce.mapper.ProduceDeviceMapper;
 import com.example.produce.mapper.ProduceFunctionMapper;
 import com.example.produce.mapper.ProduceInformationMapper;
@@ -31,9 +32,12 @@ public class ProduceInformationService {
     @Autowired
     private ProduceDeviceMapper produceDeviceMapper;
 
+    @Autowired
+    private ProduceDataMapper produceDataMapper;
+
     /**
      * 1. 添加产品
-     * @param produceInformation
+     * @param produceInformation  统计名称的数量=0 根据产品名字搜产品是否存在，传那个参数用哪个检索
      * @return
      */
     public String addProduce(ProduceInformation produceInformation){
@@ -90,10 +94,12 @@ public class ProduceInformationService {
         int[] functionIdList = produceFunctionMapper.getFunctionIdListByProduceId(produceId);
         for (int value : functionIdList) {
             produceFunctionMapper.delete(value);
+            produceDataMapper.deleteByFunctionId(value);
         }
         int[] deviceIdList = produceDeviceMapper.getDeviceIdListByProduceId(produceId);
         for(int value : deviceIdList){
             produceDeviceMapper.delete(value);
+            produceDataMapper.deleteByDeviceId(value);
         }
         produceInformationMapper.delete(produceId);
         return "删除产品成功！";
@@ -106,6 +112,7 @@ public class ProduceInformationService {
      * @return
      */
     public PageInfo findPage(int pageNum, int pageSize){
+        //放一起
         PageHelper.startPage(pageNum,pageSize);
         List<ProduceInformation> produceInformationList = this.produceInformationMapper.produceList();
         PageInfo pageInfo = new PageInfo(produceInformationList);
