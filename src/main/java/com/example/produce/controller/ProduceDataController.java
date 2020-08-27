@@ -6,6 +6,7 @@ import com.example.produce.service.ProduceFunctionService;
 import org.apache.commons.io.FileUtils;
 import com.example.produce.service.ProduceDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,6 +32,9 @@ public class ProduceDataController {
     @Autowired
     private ProduceDeviceService produceDeviceService;
 
+    @Value("${uploadFilePath}")
+    private String filePath;
+
     @RequestMapping(value = "/addData",produces = "application/json; charset=UTF-8",
             method = RequestMethod.POST)
     public @ResponseBody String addData(@RequestBody ProduceData produceData){
@@ -48,9 +52,8 @@ public class ProduceDataController {
     public @ResponseBody String addDataExcel(MultipartFile file, @RequestParam(value = "deviceId") int deviceId){
 
         try {
-            FileUtils.writeByteArrayToFile(new File("D:/upload/" + file.getOriginalFilename()), file.getBytes());
-            String fileAddress = "D:/upload/" + file.getOriginalFilename();
-            //String fileAddress = "D:\\upload\\weather.xlsx"; 放配置文件里面
+            FileUtils.writeByteArrayToFile(new File(filePath + file.getOriginalFilename()), file.getBytes());
+            String fileAddress = filePath + file.getOriginalFilename();
             int produceId = produceDeviceService.detailsDevice(deviceId).getProduceId();
             HashMap<String,Integer> hashTableNameAndId = produceFunctionService.getHashTableNameAndId(produceId);
             List<ProduceData> produceDataList = ExcelReader.readExcel(fileAddress,deviceId,hashTableNameAndId);
