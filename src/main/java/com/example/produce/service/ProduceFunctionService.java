@@ -56,13 +56,17 @@ public class ProduceFunctionService {
      * @return
      */
     public String modifyFunction(ProduceFunction produceFunction){
-
+        int produceId = produceFunction.getProduceId();
         int sameNameCount = produceFunctionMapper.getSameNameCount2(produceFunction);
-        if(sameNameCount > 0){
-            return "功能信息修改失败，失败原因：此产品下的功能名称已存在！";
+        if(produceInformationMapper.details(produceId) != null){
+            if(sameNameCount > 0){
+                return "功能信息修改失败，失败原因：此产品下的功能名称已存在！";
+            }else {
+                produceFunctionMapper.modify(produceFunction);
+                return "功能信息修改成功！";
+            }
         }else {
-            produceFunctionMapper.modify(produceFunction);
-            return "功能信息修改成功！";
+            return "功能修改失败，失败原因：此功能的产品Id找不到。";
         }
     }
 

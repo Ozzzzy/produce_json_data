@@ -1,6 +1,5 @@
 package com.example.produce.service;
 
-import com.example.produce.entity.DataRequest;
 import com.example.produce.entity.ProduceData;
 import com.example.produce.entity.ProduceDevice;
 import com.example.produce.entity.ProduceFunction;
@@ -34,13 +33,13 @@ public class ProduceDataService {
 
     /**
      * 添加数据
-     * @param dataRequest
+     * @param produceData
      * @return
      */
-    public String addData(DataRequest dataRequest){
+    public String addData(ProduceData produceData){
 
-        int deviceId = Integer.parseInt(dataRequest.getDeviceId());
-        int functionId = Integer.parseInt(dataRequest.getFunctionId());
+        int deviceId = produceData.getDeviceId();
+        int functionId = produceData.getFunctionId();
         ProduceFunction produceFunction = produceFunctionMapper.details(functionId);
         ProduceDevice produceDevice = produceDeviceMapper.details(deviceId);
         if(produceFunction != null){
@@ -48,7 +47,7 @@ public class ProduceDataService {
                 int pdId = produceDevice.getProduceId();
                 int pfId = produceFunction.getProduceId();
                 if(pdId == pfId && pdId != 0){
-                    this.produceDataMapper.add(dataRequest);
+                    this.produceDataMapper.add(produceData);
                     return "数据添加成功！";
                 }else {
                     return "数据添加失败，失败原因：功能与设备所对应的产品Id不同。";

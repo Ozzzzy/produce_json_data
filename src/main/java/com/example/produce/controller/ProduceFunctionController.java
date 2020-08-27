@@ -21,11 +21,9 @@ public class ProduceFunctionController {
     private ProduceFunctionService produceFunctionService;
 
     @RequestMapping(value = "/addFunction",produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
-    public @ResponseBody String add(String jsonString)throws Exception{
+    public @ResponseBody String add(@RequestBody ProduceFunction produceFunction)throws Exception{
 
         try {
-            JsonReader jsonReader = new JsonReader();
-            ProduceFunction produceFunction = jsonReader.getFunctionList(jsonString).get(0);
             return produceFunctionService.addFunction(produceFunction);
         }catch (Exception e){
             e.printStackTrace();
@@ -34,10 +32,8 @@ public class ProduceFunctionController {
     }
 
     @RequestMapping(value = "/modifyFunction",produces = "application/json; charset=UTF-8", method = RequestMethod.POST)
-    public @ResponseBody String modify(String jsonString)throws Exception{
+    public @ResponseBody String modify(@RequestBody ProduceFunction produceFunction)throws Exception{
         try {
-            JsonReader jsonReader = new JsonReader();
-            ProduceFunction produceFunction = jsonReader.getFunctionList(jsonString).get(0);
             return produceFunctionService.modifyFunction(produceFunction);
         }catch (Exception e){
             e.printStackTrace();

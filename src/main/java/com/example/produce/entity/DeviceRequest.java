@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class DeviceRequest {
 
-    private String deviceId;
+    private Integer deviceId;
     private String deviceIdentification;
     private String deviceName;
     private String onlineStatus;
@@ -17,13 +17,15 @@ public class DeviceRequest {
     private String activeTime;
     private String enableStatus;
     private String deviceAddress;
-    private String produceId;
+    private Integer produceId;
+    private Integer pageNum;
+    private Integer pageSize;
 
-    public String getDeviceId() {
+    public Integer getDeviceId() {
         return deviceId;
     }
 
-    public void setDeviceId(String deviceId) {
+    public void setDeviceId(Integer deviceId) {
         this.deviceId = deviceId;
     }
 
@@ -91,11 +93,27 @@ public class DeviceRequest {
         this.deviceAddress = deviceAddress;
     }
 
-    public String getProduceId() {
+    public Integer getProduceId() {
         return produceId;
     }
 
-    public void setProduceId(String produceId) {
+    public void setProduceId(Integer produceId) {
         this.produceId = produceId;
+    }
+
+    public Integer getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
     }
 }

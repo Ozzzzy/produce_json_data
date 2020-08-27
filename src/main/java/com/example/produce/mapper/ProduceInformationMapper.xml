@@ -33,7 +33,7 @@
                                                networkingMode = #{networkingMode},
                                                produceModel = #{produceModel},
                                                produceDescription = #{produceDescription}
-        WHERE produceId = #{produceId}
+        WHERE produceId = #{produceId} and isDelete = 0
     </update>
 
     <select id="details" parameterType="java.lang.Integer"
@@ -46,7 +46,7 @@
                networkingMode,
                produceModel,
                produceDescription
-        FROM produce.produce_information WHERE produceId = #{produceId}
+        FROM produce.produce_information WHERE produceId = #{produceId} and isDelete = 0
     </select>
 
     <select id="produceList" parameterType="com.example.produce.entity.ProduceInformation"

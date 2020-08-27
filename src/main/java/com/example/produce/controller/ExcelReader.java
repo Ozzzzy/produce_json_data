@@ -151,12 +151,10 @@ public class ExcelReader {
 
     public static List<ProduceData> excelDataList(int deviceId, Workbook workbook, HashMap<String, Integer> hashTableNameAndId){
         Sheet sheet = workbook.getSheetAt(0);
-        List<ProduceData> dataRequests = new ArrayList<>();
+        List<ProduceData> produceDataList = new ArrayList<>();
         int firstRowNum = sheet.getFirstRowNum();
         Row firstRow = sheet.getRow(firstRowNum);
         int lastRowNum = sheet.getLastRowNum();
-        ProduceData produceData = new ProduceData();
-
         // 遍历表一的所有行
         for(int i = firstRowNum + 1 ; i < lastRowNum + 1 ; i ++){
 
@@ -173,11 +171,11 @@ public class ExcelReader {
                 String dataString = convertCellValueToString(cellRow);
                 int functionId = hashTableNameAndId.get(functionName);
                 Date createTime = convertCellValueToDate(row.getCell(createTimeLocation-1));
-                dataRequests.add(new ProduceData(deviceId,functionId,dataString,createTime));
+                produceDataList.add(new ProduceData(deviceId,functionId,dataString,createTime));
             }
         }
 
-        return dataRequests;
+        return produceDataList;
     }
 
     /**

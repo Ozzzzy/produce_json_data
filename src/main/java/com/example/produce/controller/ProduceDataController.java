@@ -1,6 +1,5 @@
 package com.example.produce.controller;
 
-import com.example.produce.entity.DataRequest;
 import com.example.produce.entity.ProduceData;
 import com.example.produce.service.ProduceDeviceService;
 import com.example.produce.service.ProduceFunctionService;
@@ -34,12 +33,10 @@ public class ProduceDataController {
 
     @RequestMapping(value = "/addData",produces = "application/json; charset=UTF-8",
             method = RequestMethod.POST)
-    public @ResponseBody String addData(String jsonString){
+    public @ResponseBody String addData(@RequestBody ProduceData produceData){
 
         try {
-            JsonReader jsonReader = new JsonReader();
-            DataRequest dataRequest = jsonReader.getDataRequest(jsonString).get(0);
-            return produceDataService.addData(dataRequest);
+            return produceDataService.addData(produceData);
         }catch (Exception e){
             e.printStackTrace();
             return "wrong";

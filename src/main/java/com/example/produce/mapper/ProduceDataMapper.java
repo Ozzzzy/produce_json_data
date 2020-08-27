@@ -1,6 +1,5 @@
 package com.example.produce.mapper;
 
-import com.example.produce.entity.DataRequest;
 import com.example.produce.entity.ProduceData;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +14,10 @@ public interface ProduceDataMapper {
 
     /**
      * 添加数据
-     * @param dataRequest
+     * @param produceData
      * @return
      */
-    int add(DataRequest dataRequest);
+    int add(ProduceData produceData);
 
     /**
      * 批量插入数据

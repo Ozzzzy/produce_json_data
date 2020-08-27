@@ -1,9 +1,6 @@
 package com.example.produce.controller;
 
-import com.example.produce.entity.DeviceRequest;
-import com.example.produce.entity.ProduceData;
-import com.example.produce.entity.ProduceDevice;
-import com.example.produce.entity.ProduceFunction;
+import com.example.produce.entity.*;
 import com.example.produce.service.ProduceDeviceService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +22,9 @@ public class ProduceDeviceController {
 
     @RequestMapping(value = "/addDevice",produces = "application/json; charset=UTF-8",
             method = RequestMethod.POST)
-    public @ResponseBody String add(String jsonString)throws Exception{
+    public @ResponseBody String add(@RequestBody DeviceRequest deviceRequest)throws Exception{
         try {
-            JsonReader jsonReader = new JsonReader();
-            DeviceRequest deviceRequest = jsonReader.getDeviceRequest(jsonString).get(0);
             return produceDeviceService.addDevice(deviceRequest);
-
         }catch (Exception e){
             e.printStackTrace();
             return "wrong";
@@ -39,10 +33,8 @@ public class ProduceDeviceController {
 
     @RequestMapping(value = "/modifyDevice",produces = "application/json; charset=UTF-8",
             method = RequestMethod.POST)
-    public @ResponseBody String modify(String jsonString)throws Exception{
+    public @ResponseBody String modify(@RequestBody DeviceRequest deviceRequest)throws Exception{
         try {
-            JsonReader jsonReader = new JsonReader();
-            DeviceRequest deviceRequest = jsonReader.getDeviceRequest(jsonString).get(0);
             return produceDeviceService.modifyDevice(deviceRequest);
         }catch (Exception e){
             e.printStackTrace();
@@ -55,7 +47,6 @@ public class ProduceDeviceController {
     public @ResponseBody ProduceDevice details(int deviceId)throws Exception{
         try {
             return produceDeviceService.detailsDevice(deviceId);
-
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -75,12 +66,9 @@ public class ProduceDeviceController {
 
     @RequestMapping(value = "/deviceList",produces = "application/json; charset=UTF-8",
             method = RequestMethod.POST)
-    public @ResponseBody List<ProduceDevice> deviceList(String jsonString)throws Exception{
+    public @ResponseBody List<ProduceDevice> deviceList(@RequestBody DeviceRequest deviceRequest)throws Exception{
         try {
-            JsonReader jsonReader = new JsonReader();
-            DeviceRequest deviceRequest = jsonReader.getDeviceRequest(jsonString).get(0);
             return produceDeviceService.deviceList(deviceRequest);
-
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -89,12 +77,9 @@ public class ProduceDeviceController {
 
     @RequestMapping(value = "/pageDeviceInfo",produces = "application/json; charset=UTF-8",
             method = RequestMethod.POST)
-    public PageInfo pageProduceInfo(@RequestParam int pageNum, @RequestParam int pageSize ,String jsonString)
-            throws Exception{
+    public PageInfo pageProduceInfo(@RequestBody DeviceRequest deviceRequest) throws Exception{
         try {
-            JsonReader jsonReader = new JsonReader();
-            DeviceRequest deviceRequest = jsonReader.getDeviceRequest(jsonString).get(0);
-            return produceDeviceService.findPage(pageNum,pageSize,deviceRequest);
+            return produceDeviceService.findPage(deviceRequest);
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -109,9 +94,9 @@ public class ProduceDeviceController {
 
     @RequestMapping(value = "/getDataListByFunction" ,produces = "application/json; charset=UTF-8",
             method = RequestMethod.POST)
-    public PageInfo getDataListByFunction(int deviceId, int functionId, int pageNum, int pageSize){
+    public PageInfo getDataListByFunction(@RequestBody DataRequest DataRequest){
         try {
-            return produceDeviceService.findPageData(pageNum,pageSize,deviceId,functionId);
+            return produceDeviceService.findPageData(DataRequest);
         }catch (Exception e){
             e.printStackTrace();
             return null;

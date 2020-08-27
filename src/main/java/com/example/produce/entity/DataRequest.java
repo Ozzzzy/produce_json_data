@@ -1,44 +1,53 @@
 package com.example.produce.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
  * @author hou
- * @date 2020/8/24
+ * @date 2020/8/27
  */
 public class DataRequest {
 
-    private String dataId;
-    private String deviceId;
-    private String functionId;
+    private Integer dataId;
+
+    private Integer deviceId;
+
+    private Integer functionId;
+
     private String dataString;
-    private String createTime;
 
-    public DataRequest(){
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date createTime;
 
-    }
+    private Integer pageNum;
 
-    public String getDataId() {
+    private Integer pageSize;
+
+
+
+    public Integer getDataId() {
         return dataId;
     }
 
-    public void setDataId(String dataId) {
+    public void setDataId(Integer dataId) {
         this.dataId = dataId;
     }
 
-    public String getDeviceId() {
+    public Integer getDeviceId() {
         return deviceId;
     }
 
-    public void setDeviceId(String deviceId) {
+    public void setDeviceId(Integer deviceId) {
         this.deviceId = deviceId;
     }
 
-    public String getFunctionId() {
+    public Integer getFunctionId() {
         return functionId;
     }
 
-    public void setFunctionId(String functionId) {
+    public void setFunctionId(Integer functionId) {
         this.functionId = functionId;
     }
 
@@ -50,11 +59,36 @@ public class DataRequest {
         this.dataString = dataString;
     }
 
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public DataRequest(){}
+
+    public DataRequest(Integer deviceId,Integer functionId, String dataString, Date createTime){
+        this.deviceId = deviceId;
+        this.functionId = functionId;
+        this.dataString = dataString;
         this.createTime = createTime;
     }
 }

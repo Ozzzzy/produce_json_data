@@ -56,11 +56,10 @@ public interface ProduceDeviceMapper {
 
     /**
      * 7. 查看设备某一功能点数据列表
-     * @param deviceId
-     * @param functionId
+     * @param dataRequest
      * @return
      */
-    List<ProduceData> getDataListByFunction(int deviceId, int functionId);
+    List<ProduceData> getDataListByFunction(DataRequest dataRequest);
 
     /**
      * 8. 获取同产品下设备名称同名数 用于添加

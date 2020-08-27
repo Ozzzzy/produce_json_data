@@ -10,38 +10,39 @@ import java.util.Date;
  */
 public class ProduceData {
 
-    private int dataId;
+    private Integer dataId;
 
-    private int deviceId;
+    private Integer deviceId;
 
-    private int functionId;
+    private Integer functionId;
 
     private String dataString;
 
     @JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
-    public int getDataId() {
+
+    public Integer getDataId() {
         return dataId;
     }
 
-    public void setDataId(int dataId) {
+    public void setDataId(Integer dataId) {
         this.dataId = dataId;
     }
 
-    public int getDeviceId() {
+    public Integer getDeviceId() {
         return deviceId;
     }
 
-    public void setDeviceId(int deviceId) {
+    public void setDeviceId(Integer deviceId) {
         this.deviceId = deviceId;
     }
 
-    public int getFunctionId() {
+    public Integer getFunctionId() {
         return functionId;
     }
 
-    public void setFunctionId(int functionId) {
+    public void setFunctionId(Integer functionId) {
         this.functionId = functionId;
     }
 
@@ -61,11 +62,9 @@ public class ProduceData {
         this.createTime = createTime;
     }
 
-    public ProduceData(){
+    public ProduceData(){}
 
-    }
-
-    public ProduceData(int deviceId, int functionId, String dataString, Date createTime){
+    public ProduceData(Integer deviceId,Integer functionId, String dataString, Date createTime){
         this.deviceId = deviceId;
         this.functionId = functionId;
         this.dataString = dataString;

@@ -117,7 +117,7 @@
         FROM produce.produce_function WHERE produceId = #{produceId} and isDelete = 0
     </select>
 
-    <select id="getDataListByFunction" parameterType="com.example.produce.entity.ProduceData"
+    <select id="getDataListByFunction" parameterType="com.example.produce.entity.DataRequest"
             resultType="com.example.produce.entity.ProduceData">
         SELECT dataId, deviceId, functionId, dataString, createTime
         from produce.produce_data WHERE deviceId = #{deviceId} and functionId = #{functionId} and isDelete = 0

@@ -36,7 +36,7 @@ public class ProduceDeviceService {
      * @return
      */
     public String addDevice(DeviceRequest deviceRequest) {
-        int produceId = Integer.parseInt(deviceRequest.getProduceId());
+        int produceId = deviceRequest.getProduceId();
         int sameNameCount = produceDeviceMapper.getSameNameCount(deviceRequest);
         if(produceInformationMapper.details(produceId) != null){
             if(sameNameCount > 0){
@@ -56,12 +56,17 @@ public class ProduceDeviceService {
      * @return
      */
     public String modifyDevice(DeviceRequest deviceRequest) {
+        int produceId = deviceRequest.getProduceId();
         int sameNameCount = produceDeviceMapper.getSameNameCount2(deviceRequest);
-        if(sameNameCount > 0){
-            return "设备信息修改失败，失败原因：此产品下的设备名称已存在！";
+        if(produceInformationMapper.details(produceId) != null){
+            if(sameNameCount > 0){
+                return "设备信息修改失败，失败原因：此产品下的设备名称已存在！";
+            }else {
+                produceDeviceMapper.modify(deviceRequest);
+                return "设备信息修改成功！";
+            }
         }else {
-            produceDeviceMapper.modify(deviceRequest);
-            return "设备信息修改成功！";
+            return "设备修改失败，失败原因：此设备的产品Id找不到。";
         }
     }
 
@@ -105,21 +110,21 @@ public class ProduceDeviceService {
 
     /**
      * 7. 查看设备某一功能点数据列表
-     * @param deviceId
-     * @param functionId
+     * @param dataRequest
      * @return
      */
-    public List<ProduceData> getDataListByFunction(int deviceId, int functionId){
-        return this.produceDeviceMapper.getDataListByFunction(deviceId, functionId);
+    public List<ProduceData> getDataListByFunction(DataRequest dataRequest){
+        return this.produceDeviceMapper.getDataListByFunction(dataRequest);
     }
 
     /**
      * 分页查询设备
-     * @param pageNum
-     * @param pageSize
+     * @param deviceRequest
      * @return
      */
-    public PageInfo findPage(int pageNum, int pageSize, DeviceRequest deviceRequest){
+    public PageInfo findPage(DeviceRequest deviceRequest){
+        int pageNum = deviceRequest.getPageNum();
+        int pageSize = deviceRequest.getPageSize();
         PageHelper.startPage(pageNum,pageSize);
         List<ProduceDevice> produceDeviceList = this.produceDeviceMapper.deviceList(deviceRequest);
         PageInfo pageInfo = new PageInfo(produceDeviceList);
@@ -127,14 +132,15 @@ public class ProduceDeviceService {
     }
 
     /**
-     * 分页查询设备
-     * @param pageNum
-     * @param pageSize
+     * 分页查询设备某功能点下的数据
+     * @param dataRequest
      * @return
      */
-    public PageInfo findPageData(int pageNum, int pageSize,int deviceId, int functionId){
+    public PageInfo findPageData(DataRequest dataRequest){
+        int pageNum = dataRequest.getPageNum();
+        int pageSize = dataRequest.getPageSize();
         PageHelper.startPage(pageNum,pageSize);
-        List<ProduceData> produceDataList = produceDeviceMapper.getDataListByFunction(deviceId,functionId);
+        List<ProduceData> produceDataList = produceDeviceMapper.getDataListByFunction(dataRequest);
         PageInfo pageInfo = new PageInfo(produceDataList);
         return pageInfo;
     }
