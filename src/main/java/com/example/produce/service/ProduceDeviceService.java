@@ -85,8 +85,8 @@ public class ProduceDeviceService {
      * @return
      */
     public String deleteDevice(int deviceId){
-        produceDeviceMapper.delete(deviceId);
         produceDataMapper.deleteByDeviceId(deviceId);
+        produceDeviceMapper.delete(deviceId);
         return "删除设备成功！";
     }
 

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -47,10 +49,10 @@ public class ProduceDataController {
         }
     }
 
-    @RequestMapping(value = "/addDataExcel",produces = "application/json; charset=UTF-8",
+    @RequestMapping(value = "/addDataByExcel",produces = "application/json; charset=UTF-8",
             method = RequestMethod.POST)
     public @ResponseBody String addDataExcel(MultipartFile file, @RequestParam(value = "deviceId") int deviceId){
-
+        Long dateStart = System.currentTimeMillis();
         try {
             FileUtils.writeByteArrayToFile(new File(filePath + file.getOriginalFilename()), file.getBytes());
             String fileAddress = filePath + file.getOriginalFilename();
@@ -58,7 +60,7 @@ public class ProduceDataController {
             HashMap<String,Integer> hashTableNameAndId = produceFunctionService.getHashTableNameAndId(produceId);
             List<ProduceData> produceDataList = ExcelReader.readExcel(fileAddress,deviceId,hashTableNameAndId);
             int batch = 5 * hashTableNameAndId.size();
-            return produceDataService.batchInsert(produceDataList,batch);
+            return produceDataService.batchInsert(dateStart,produceDataList,batch);
 
         }catch (Exception e){
             e.printStackTrace();

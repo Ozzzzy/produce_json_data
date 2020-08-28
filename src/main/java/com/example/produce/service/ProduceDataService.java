@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -65,7 +67,8 @@ public class ProduceDataService {
      * @param batchSize
      * @return
      */
-    public String batchInsert(List<ProduceData> listAll, int batchSize){
+    public String batchInsert(Long dateStart,List<ProduceData> listAll, int batchSize){
+
         int listAllSize = listAll.size();
         List<ProduceData> produceDataList = new ArrayList<>();
         for(int j = 0 ; j < listAllSize; j += batchSize){
@@ -88,6 +91,8 @@ public class ProduceDataService {
                 produceDataList.clear();
             }
         }
-        return "批量插入成功!";
+        Long dateEnd = System.currentTimeMillis();
+        double runningTime = (dateEnd - dateStart) / 1000.00;
+        return "批量插入成功! " + "方法运行时间： " + runningTime + " 秒";
     }
 }

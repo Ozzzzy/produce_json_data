@@ -93,8 +93,8 @@ public class ProduceFunctionService {
      * @return
      */
     public String deleteFunction(int functionId){
-        produceFunctionMapper.delete(functionId);
         produceDataMapper.deleteByFunctionId(functionId);
+        produceFunctionMapper.delete(functionId);
         return "删除功能成功！";
     }
 

@@ -90,13 +90,13 @@ public class ProduceInformationService {
     public String deleteProduce(int produceId){
         int[] functionIdList = produceFunctionMapper.getFunctionIdListByProduceId(produceId);
         for (int value : functionIdList) {
-            produceFunctionMapper.delete(value);
             produceDataMapper.deleteByFunctionId(value);
+            produceFunctionMapper.delete(value);
         }
         int[] deviceIdList = produceDeviceMapper.getDeviceIdListByProduceId(produceId);
         for(int value : deviceIdList){
+            //produceDataMapper.deleteByDeviceId(value);
             produceDeviceMapper.delete(value);
-            produceDataMapper.deleteByDeviceId(value);
         }
         produceInformationMapper.delete(produceId);
         return "删除产品成功！";
